@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{items.title}} {% endblock title %}
+{% block body %}
+
+<div class="d-flex justify-content-center">
+    <div class="card mt-5 " style="width: 50%; ">
+        <div class="card-body bg-light ">
+            <h3 class="card-title" style="color:#ff5733 ;">{{items.title}}</h3>
+            <br>
+            <p class="card-text">{{items.description}}</p>
+            <a href="{% url 'home' %}" class="card-link"> < Home </a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

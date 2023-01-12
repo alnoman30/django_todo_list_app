@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+<h2 class="text-center my-3">TO-DO List Application</h2>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-success table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Serial</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Created Time</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong>Hey! </strong>{{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% for i in items %}
+                    {% if i.status %}
+                    <tr class="table-info">
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="{% url 'insideItem' i.id %}">{{i.title}}</a></td>
+                        <td>{{i.time}}</td>
+                        <td><a href="{% url 'incomplete' i.id%}"><i class="fa-solid fa-check"></i></a></td>
+                        <td>
+                            <a href="{% url 'delete' i.id %}" class="btn btn-danger md-sm">Delete</a>
+                            <a href="{% url 'update' i.id %}" class="btn btn-success md-sm">Update</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="{% url 'insideItem' i.id %}">{{i.title}}</a></td>
+                        <td>{{i.time}}</td>
+                        <td> <a href="{% url 'complete' i.id %}"><i class="fa-solid fa-xmark"></i></a></td>
+                        <td>
+                            <a href="{% url 'delete' i.id %}" class="btn btn-danger md-sm">Delete</a>
+                            <a href="{% url 'update' i.id %}" class="btn btn-success md-sm">Update</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
